@@ -18,7 +18,10 @@ function Hone ( options ) {
     this.current = this.options.hone;
     this.postEmitter = new PostEmitter( this.options );
     this.el = this.postEmitter.el;
+
 }
+
+Hone.prototype = this;
 
 /* Hone::setSrc
  *
@@ -134,6 +137,7 @@ Hone.prototype.init = function ( opts ) {
     if ( opts.resize || this.el.dataset.resize ) {
         this.on('resize', this.onIframeResize());
     }
+    if ( 'AutoTarget' in parent ) { console.log('autotargeting')}
 };
 
 /* initializing Hone
@@ -157,5 +161,8 @@ var el = document.querySelector('[data-hone]'),
  *     script loading eg. '<script src="path-to/embed.js" defer></script>'
  */
 
-if ( typeof onHoneReady === 'function' ) return onHoneReady( hone );
-window.hone = hone;
+if ( typeof onHoneReady === 'function' ) {
+    onHoneReady( hone );
+} else {
+    window.hone = hone;
+}

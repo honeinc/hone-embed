@@ -284,4 +284,4 @@ if( typeof onPostEmitterReady === 'function' ) {
 }
 
 
-}( window, document ));
+}.call( {}, window, document ));

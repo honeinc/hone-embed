@@ -284,6 +284,15 @@ if( typeof onPostEmitterReady === 'function' ) {
 }
 
 
+'use strict';
+
+/* this in this instance should be privatly scoped*/
+this.AutoTarget = AutoTarget;
+
+function AutoTarget ( ) {
+
+}
+
 /* global PostEmitter, onHoneReady */
 'use strict';
 
@@ -304,7 +313,10 @@ function Hone ( options ) {
     this.current = this.options.hone;
     this.postEmitter = new PostEmitter( this.options );
     this.el = this.postEmitter.el;
+
 }
+
+Hone.prototype = this;
 
 /* Hone::setSrc
  *
@@ -420,6 +432,7 @@ Hone.prototype.init = function ( opts ) {
     if ( opts.resize || this.el.dataset.resize ) {
         this.on('resize', this.onIframeResize());
     }
+    if ( 'AutoTarget' in parent ) { console.log('autotargeting')}
 };
 
 /* initializing Hone
@@ -434,6 +447,8 @@ var el = document.querySelector('[data-hone]'),
         prefix : 'Hone:'
     });
 
+debugger;
+
 /* exporting hone instance
  * this is how we export hone, there is the global option or readyHandler option
  * - the global option simply exports hone to window.hone
@@ -443,17 +458,10 @@ var el = document.querySelector('[data-hone]'),
  *     script loading eg. '<script src="path-to/embed.js" defer></script>'
  */
 
-if ( typeof onHoneReady === 'function' ) return onHoneReady( hone );
-window.hone = hone;
-
-/* global Hone */
-
-'use strict';
-
-Hone.prototype.AutoTarget = AutoTarget;
-
-function AutoTarget ( ) {
-
+if ( typeof onHoneReady === 'function' ) {
+    onHoneReady( hone );
+} else {
+    window.hone = hone;
 }
 
-}( window, document ));
+}.call( {}, window, document ));
