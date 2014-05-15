@@ -2,7 +2,7 @@
 'use strict';
 
 var supported = ( 'postMessage' in window ) && 
-        ( 'bind' in function(){} ) &&
+        ( Function.prototype.hasOwnProperty( 'bind' ) ) &&
         ( 'JSON' in window ),
     isComponent = ( typeof module === 'object' ) && 
         ( 'require' in window ), 
