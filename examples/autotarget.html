@@ -1,0 +1,16 @@
+<!doctype html>
+<meta name="description" content="This is a puppy doggy kitty cat test" />
+<meta name="keywords" content="pooch, puppy, dog, cat, kitty" />
+<iframe width="600px" height="800px" frameborder="0" data-hone="535ae2b5a9847dd53d4886d1" data-resize="true">You Dont Support Iframes</iframe>
+<script src="../build/embed.autotarget.js" defer></script>
+<script>
+onHoneReady = function ( hone ) {
+    hone.init({
+        domain : 'http://localhost:8000'
+    });
+    
+    hone.on('rendered', function(){
+        console.log('got rendered event')
+    });
+};
+</script>
