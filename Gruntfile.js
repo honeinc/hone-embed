@@ -24,7 +24,17 @@ module.exports = function (grunt) {
                     'hone.js',
                     'lib/closureClose.js'],
                 dest: 'build/embed.js',
-            }
+            },
+            hone_auto_targeting: {
+                src: [
+                    'lib/closureOpen.js',
+                    'lib/Emitter.js', 
+                    'index.js',
+                    'hone.js',
+                    'hone-autotarget.js',
+                    'lib/closureClose.js'],
+                dest: 'build/embed.autotarget.js',
+            },
         },
         connect: {
             server: {
