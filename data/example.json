@@ -1,0 +1,317 @@
+[
+  {
+    "__v": 10,
+    "_id": "5319243f5067cac36f9cc617",
+    "acceptingVotes": true,
+    "agreement": null,
+    "allowAnonymousVotes": true,
+    "callToAction": null,
+    "commenting": true,
+    "completedAt": null,
+    "confirmVoteExtraInfo": null,
+    "confirmVotes": true,
+    "createdAt": "2014-03-07T01:43:27.954Z",
+    "critiquesAtTop": false,
+    "curated": true,
+    "deletedAt": null,
+    "description": null,
+    "designs": [
+      {
+        "__v": 0,
+        "_id": "53192452b7d7605f59d958db",
+        "chooseAction": null,
+        "content": "#SorryNotSorry",
+        "createdAt": "2014-03-07T01:43:46.822Z",
+        "critiques": [],
+        "deletedAt": null,
+        "features": [],
+        "link": null,
+        "linkAction": null,
+        "media": {
+          "product": []
+        },
+        "nextContest": null,
+        "photos": {
+          "ads": {
+            "medium_box": null
+          },
+          "product": [
+            {
+              "url": "http://cache.gohone.com/surveys/5319243f5067cac36f9cc617/9c621359-d78b-42bc-983d-3db73a15f5de/netflixf.jpg",
+              "_id": "531a5b74f61714bf27831dd5",
+              "scale": 100,
+              "y": 50,
+              "x": 50,
+              "preview": null
+            }
+          ]
+        },
+        "postVotePitch": null,
+        "skipPostVote": false,
+        "styling": {
+          "title": {
+            "color": "rgb(139, 39, 29)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "buyButton": {
+            "color": null,
+            "background": null
+          },
+          "voteButton": {
+            "color": null,
+            "background": null
+          }
+        },
+        "tags": [],
+        "title": "In bed watching Netflix",
+        "updatedAt": "2014-03-12T23:54:18.534Z",
+        "user": "510814d4952c950c04000003",
+        "urls": {
+          "self": "/api/1.0/Design/53192452b7d7605f59d958db",
+          "email": "/api/1.0/Design/53192452b7d7605f59d958db/Email"
+        }
+      },
+      {
+        "__v": 0,
+        "_id": "5319246a9aa743e946c5eb05",
+        "chooseAction": null,
+        "content": "The 9-0 is a USC staple. Tequila shots anyone?",
+        "createdAt": "2014-03-07T01:44:10.871Z",
+        "critiques": [],
+        "deletedAt": null,
+        "features": [],
+        "link": null,
+        "linkAction": null,
+        "media": {
+          "product": []
+        },
+        "nextContest": null,
+        "photos": {
+          "ads": {
+            "medium_box": null
+          },
+          "product": [
+            {
+              "url": "http://cache.gohone.com/surveys/5319243f5067cac36f9cc617/51429658-7a26-4dbd-af15-d4f2805d56bd/901f.jpg",
+              "_id": "531926499c5024c75f2774e1",
+              "scale": 105.37,
+              "y": 50,
+              "x": 50,
+              "preview": null
+            }
+          ]
+        },
+        "postVotePitch": null,
+        "skipPostVote": false,
+        "styling": {
+          "title": {
+            "color": "rgb(139, 39, 29)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "buyButton": {
+            "color": null,
+            "background": null
+          },
+          "voteButton": {
+            "color": null,
+            "background": null
+          }
+        },
+        "tags": [],
+        "title": "The 9-0",
+        "updatedAt": "2014-03-12T23:54:18.543Z",
+        "user": "510814d4952c950c04000003",
+        "urls": {
+          "self": "/api/1.0/Design/5319246a9aa743e946c5eb05",
+          "email": "/api/1.0/Design/5319246a9aa743e946c5eb05/Email"
+        }
+      },
+      {
+        "__v": 0,
+        "_id": "53192473b7d7605f59d958dd",
+        "chooseAction": null,
+        "content": "Midnight munchies at their finest...",
+        "createdAt": "2014-03-07T01:44:19.364Z",
+        "critiques": [],
+        "deletedAt": null,
+        "features": [],
+        "link": null,
+        "linkAction": null,
+        "media": {
+          "product": []
+        },
+        "nextContest": null,
+        "photos": {
+          "ads": {
+            "medium_box": null
+          },
+          "product": [
+            {
+              "url": "http://cache.gohone.com/surveys/5319243f5067cac36f9cc617/b7e181a4-018b-4710-b809-f6c997234e17/panda1f.jpg",
+              "_id": "531a4148383f3bcb506f2cc0",
+              "scale": 100,
+              "y": 50,
+              "x": 50,
+              "preview": null
+            }
+          ]
+        },
+        "postVotePitch": null,
+        "skipPostVote": false,
+        "styling": {
+          "title": {
+            "color": "rgb(139, 39, 29)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "buyButton": {
+            "color": null,
+            "background": null
+          },
+          "voteButton": {
+            "color": null,
+            "background": null
+          }
+        },
+        "tags": [],
+        "title": "Panda Express",
+        "updatedAt": "2014-03-12T23:54:18.553Z",
+        "user": "510814d4952c950c04000003",
+        "urls": {
+          "self": "/api/1.0/Design/53192473b7d7605f59d958dd",
+          "email": "/api/1.0/Design/53192473b7d7605f59d958dd/Email"
+        }
+      },
+      {
+        "__v": 0,
+        "_id": "5319247bb7d7605f59d958df",
+        "chooseAction": null,
+        "content": "Hotties and themed parties. WIN.",
+        "createdAt": "2014-03-07T01:44:27.610Z",
+        "critiques": [],
+        "deletedAt": null,
+        "features": [],
+        "link": null,
+        "linkAction": null,
+        "media": {
+          "product": []
+        },
+        "nextContest": null,
+        "photos": {
+          "ads": {
+            "medium_box": null
+          },
+          "product": [
+            {
+              "url": "http://cache.gohone.com/surveys/5319243f5067cac36f9cc617/8dd1d77b-9df5-4ef2-8b63-1dab46947c03/frat1f.jpg",
+              "_id": "531a59d33472edb7378f24fa",
+              "scale": 100,
+              "y": 50,
+              "x": 50,
+              "preview": null
+            }
+          ]
+        },
+        "postVotePitch": null,
+        "skipPostVote": false,
+        "styling": {
+          "title": {
+            "color": "rgb(139, 39, 29)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          "buyButton": {
+            "color": null,
+            "background": null
+          },
+          "voteButton": {
+            "color": null,
+            "background": null
+          }
+        },
+        "tags": [],
+        "title": "The Row",
+        "updatedAt": "2014-03-12T23:54:54.067Z",
+        "user": "510814d4952c950c04000003",
+        "urls": {
+          "self": "/api/1.0/Design/5319247bb7d7605f59d958df",
+          "email": "/api/1.0/Design/5319247bb7d7605f59d958df/Email"
+        }
+      }
+    ],
+    "emailFromAddress": null,
+    "emailFromAddressVerified": false,
+    "endsAt": null,
+    "featured": false,
+    "footerOverride": null,
+    "gatherDemographics": true,
+    "hidden": false,
+    "itemDetails": true,
+    "logoutAfterVote": false,
+    "nextContest": null,
+    "photo": {
+      "url": "http://cache.gohone.com/surveys/5319243f5067cac36f9cc617/7b343b7d-ad32-4ca1-8569-53acf1cfb4d9/usc3FF.jpg",
+      "x": null,
+      "y": null,
+      "scale": null
+    },
+    "postVoteEmailSubject": null,
+    "postbackURL": null,
+    "question": "Where's the best place to be at USC on a Saturday night?",
+    "randomizeItemOrder": false,
+    "refreshAfterVote": false,
+    "related": [],
+    "reward": false,
+    "sharingCallToAction": "Share your pick with friends to see where they want to be Saturday night! @usc @usctrojans @usctmb ",
+    "showCritiquesOnMainPage": false,
+    "showRelated": true,
+    "showTags": true,
+    "signupPitch": null,
+    "skipPostVote": false,
+    "startsAt": "2014-03-07T01:43:27.953Z",
+    "styling": {
+      "body": {
+        "background": null
+      },
+      "title": {
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(152, 15, 7)"
+      },
+      "buyButton": {
+        "color": null,
+        "background": null
+      },
+      "voteButton": {
+        "color": null,
+        "background": "rgb(152, 15, 7)"
+      }
+    },
+    "tags": [
+      "usc",
+      "college",
+      "la",
+      "los angeles",
+      "food & drink"
+    ],
+    "title": null,
+    "updatedAt": "2014-05-08T23:17:06.122Z",
+    "user": "52fc698eedea63fa3695ee2c",
+    "whiteLabel": false,
+    "brand": null,
+    "urls": {
+      "self": "/api/1.0/Contest/5319243f5067cac36f9cc617",
+      "design": "/api/1.0/Contest/5319243f5067cac36f9cc617/Design",
+      "dynamics": "/api/1.0/Contest/5319243f5067cac36f9cc617/Dynamics",
+      "vote": "/api/1.0/Contest/5319243f5067cac36f9cc617/Vote",
+      "comment": "/api/1.0/Contest/5319243f5067cac36f9cc617/Comment",
+      "email": "/api/1.0/Contest/5319243f5067cac36f9cc617/Email",
+      "shared": "/api/1.0/Contest/5319243f5067cac36f9cc617/Shared",
+      "voterData": "/api/1.0/Contest/5319243f5067cac36f9cc617/VoterData",
+      "sendNotifications": "/api/1.0/Contest/5319243f5067cac36f9cc617/sendNotifications",
+      "emailTotals": "/api/1.0/Contest/5319243f5067cac36f9cc617/emailTotals",
+      "resetVotes": "/api/1.0/Contest/5319243f5067cac36f9cc617/ResetVotes",
+      "critique": "/api/1.0/Contest/5319243f5067cac36f9cc617/Critique",
+      "link": "/Contest/5319243f5067cac36f9cc617"
+    },
+    "ended": false,
+    "mine": true
+  }
+]

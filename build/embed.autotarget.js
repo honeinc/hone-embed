@@ -296,13 +296,18 @@ function AutoTarget ( opts ) {
     this.payload = this._getMeta();
     this.url = this.hone.domain + '/api/1.0/Recommendations/Contests';
     // does request
-    this.xhr = this.request( function ( err, res ) {
-        console.log( arguments );  
+    this.xhr = this.request( function ( err, res ) {  
         if ( err ) {
             return this.hone._emitter.emit( 'error', err );
         } 
         // parse through results and use
         // this.hone.setSrc
+        if ( res.length ) {
+            this.contest = res[0];
+            opts.contestId = this.contest._id;
+            this.hone.setSrc( opts );
+            this.hone.postEmitter._emitter.emit('contest_found', this.contest);
+        }
     }.bind( this ));
 
 }
@@ -313,12 +318,14 @@ AutoTarget.prototype.request = function( callback ) {
         return;
     }
 
-    var xhr = new XMLHttpRequest( );
+    var xhr = new XMLHttpRequest( ),
+        url = '../data/example.json';
 
-    xhr.open( 'GET', this.url + '?' + this.qsSerialize( this.payload ), true );
+    // xhr.open( 'GET', this.url + '?' + this.qsSerialize( this.payload ), true );
+    xhr.open( 'GET', url, true );
     xhr.setRequestHeader( "Content-Type", "application/json;charset=UTF-8" );
     xhr.send( );
-    xhr.onReadyStatechange = this.onReadyStatechange.bind( this, callback );
+    xhr.onreadystatechange = this.onReadyStatechange.bind( this, callback );
     return xhr;
 };
 
@@ -418,7 +425,7 @@ Hone.prototype.setSrc = function ( opts ) {
     var domain = this.domain,
         debug = opts.debug ? '&debug=true' : '',
         type = opts.ad ? 'AdUnit' : 'Contest',
-        id = this.el.dataset.hone;
+        id = opts.contestId || this.el.dataset.hone;
 
     this.el.src = domain + '/' + type + '/' + id + '?embed=true' + debug;
 };
@@ -513,14 +520,15 @@ Hone.urlParser = function ( url ) {
 Hone.prototype.init = function ( opts ) {
     opts = opts || {};
     this.domain = opts.domain || 'http://gohone.com'; 
-    if ( !this.el.src ) this.setSrc( opts );
     if ( opts.resize || this.el.dataset.resize ) {
         this.on('resize', this.onIframeResize());
     }
     if ( opts.autoTarget && this.AutoTarget ) { 
         opts.hone = this;
         this.autoTarget = new (this.AutoTarget)( opts );
+        return; 
     }
+    if ( !this.el.src ) this.setSrc( opts );
 };
 
 /* initializing Hone

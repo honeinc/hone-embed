@@ -39,7 +39,7 @@ Hone.prototype.setSrc = function ( opts ) {
     var domain = this.domain,
         debug = opts.debug ? '&debug=true' : '',
         type = opts.ad ? 'AdUnit' : 'Contest',
-        id = this.el.dataset.hone;
+        id = opts.contestId || this.el.dataset.hone;
 
     this.el.src = domain + '/' + type + '/' + id + '?embed=true' + debug;
 };
@@ -134,14 +134,15 @@ Hone.urlParser = function ( url ) {
 Hone.prototype.init = function ( opts ) {
     opts = opts || {};
     this.domain = opts.domain || 'http://gohone.com'; 
-    if ( !this.el.src ) this.setSrc( opts );
     if ( opts.resize || this.el.dataset.resize ) {
         this.on('resize', this.onIframeResize());
     }
     if ( opts.autoTarget && this.AutoTarget ) { 
         opts.hone = this;
         this.autoTarget = new (this.AutoTarget)( opts );
+        return; 
     }
+    if ( !this.el.src ) this.setSrc( opts );
 };
 
 /* initializing Hone
