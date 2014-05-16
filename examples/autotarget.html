@@ -6,7 +6,8 @@
 <script>
 onHoneReady = function ( hone ) {
     hone.init({
-        domain : 'http://localhost:8000'
+        domain : 'http://localhost:8000',
+        autoTarget : true
     });
     
     hone.on('rendered', function(){

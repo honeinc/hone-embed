@@ -36,7 +36,7 @@ Hone.prototype = this;
  */
 
 Hone.prototype.setSrc = function ( opts ) {
-    var domain = opts.domain || 'http://gohone.com',
+    var domain = this.domain,
         debug = opts.debug ? '&debug=true' : '',
         type = opts.ad ? 'AdUnit' : 'Contest',
         id = this.el.dataset.hone;
@@ -133,11 +133,15 @@ Hone.urlParser = function ( url ) {
 
 Hone.prototype.init = function ( opts ) {
     opts = opts || {};
+    this.domain = opts.domain || 'http://gohone.com'; 
     if ( !this.el.src ) this.setSrc( opts );
     if ( opts.resize || this.el.dataset.resize ) {
         this.on('resize', this.onIframeResize());
     }
-    if ( 'AutoTarget' in parent ) { console.log('autotargeting')}
+    if ( opts.autoTarget && this.AutoTarget ) { 
+        opts.hone = this;
+        this.autoTarget = new (this.AutoTarget)( opts );
+    }
 };
 
 /* initializing Hone
