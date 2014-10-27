@@ -6,18 +6,18 @@ Simple interactions with embedded Hone Questions and Quizzes.
 
 ## Installation
 
-If you copied the embeded code from the gohone.com interface you can just add a `data-hone` attribute to the iframe to enable the code to run against that embed.
+If you copied the embeded code from the gohone.com interface you can just add a `data-hone` attribute to the iframe to enable the code to run against that embed. _This should be loaded before the script_.
 
 ```html
-<iframe src="..." data-hone data-resize="true"></iframe>
+<iframe src="...?embed=true" data-hone data-resize="true"></iframe>
 ```
 
 optionally you can try out a beta feature that allows the iframe to resize its height dynamically to the content inside of the iframe by adding a `data-resize` attribute to the iframe.
 
-Include the script into your page ( script located in `build` directory ).
+Include the script into your page ( script located in `build` directory ) or _our cdn_
 
 ```html
-<script src="/path-to/embed.js"></script>
+<script src="//honefiles.global.ssl.fastly.net/embed/hone-0.1.5.min.js"></script>
 ```
 
 ## Usage
@@ -28,12 +28,16 @@ After you load the script we export out a `hone` variable into the `window`, or 
 hone.init();
 
 hone.on( 'voted', function( e ) {
-    // when the users votes, you could, for example:
-    //   - refresh ads on the page
-    //   - look at the selected item in the event and update ads
-    //   - track a metric of your own
+    /* 
+    when the users votes, you could, for example:
+        - refresh ads on the page
+        - look at the selected item in the event and update ads
+        - track a metric of your own
+    */
 } );
 ```
+
+More working examples can be found in [`examples directory`](https://github.com/honeinc/hone-embed/tree/master/examples).
 
 ## Available Events
 
