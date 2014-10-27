@@ -25,10 +25,14 @@ Include the script into your page ( script located in `build` directory ).
 After you load the script we export out a `hone` variable into the `window`, or global scope. First you need to initialize the script and then you can attach event bindings to that variable.
 
 ```javascript
-hone.init( );
-hone.on('buy_button_clicked', function( e ){
-  console.log('Clicked the buy button');
-});
+hone.init();
+
+hone.on( 'voted', function( e ) {
+    // when the users votes, you could, for example:
+    //   - refresh ads on the page
+    //   - look at the selected item in the event and update ads
+    //   - track a metric of your own
+} );
 ```
 
 ## Available Events
