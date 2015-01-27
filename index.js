@@ -1,129 +1,174 @@
-/* global top, self, Emitter, onPostEmitterReady, require, module */
+/* global PostEmitter, onHoneReady */
+
 'use strict';
 
-var isComponent = ( typeof module === 'object' ) && ( 'require' in window ), 
-    isIframe = (top !== self),
-    _Emitter;
+var PostEmitter = require( 'post-emitter' );
 
-if ( isComponent ) {
-    _Emitter = require('emitter');
-} else {
-    _Emitter = Emitter;
-}
-
-/*
- * Constructor sets up some simple listeners and
- * gets the element.
+/* Hone - Constructor
+ *
+ * a options { Object } is passed to the function
+ * this in turn is passed to the postEmitter Constructor
+ *
+ * - options.selector** - required { String } 
+ * - options.prefix** - required  { String } 
+ * - options.hone - optional { Object }
+ *   - object containing contestId ( ref on current embed implementation )
+ * ** are required by postEmitter
  */
 
-function PostEmitter( options ) {
-
-    // setting basic vars
-    this.isIframe = isIframe;
+function Hone ( options ) {
     this.options = options || {};
-    this._emitter = new _Emitter( );
-    this.el = (isIframe) ? null : this.getFrame( this.options.selector );
-    this.prefix = new RegExp( '^' + this.options.prefix );
-    this.prefixLength = this.options.prefix.length;
-    this.setOrigin( this.options.origin );
-    this.addListener();
+    this.current = this.options.hone;
+    this.postEmitter = new PostEmitter( this.options );
+    this.el = this.postEmitter.el;
+    if ( this.el.getAttribute( 'data-resize' ) ) {
+        this._resize = true;
+        this.on('resize', this.onIframeResize());
+    }
 }
 
-/*
- * Selects a iframe based off the id passed to it
+/* Hone::setSrc
+ *
+ * a opts or options { Object } is passed to the function
+ *
+ * - opts.domain { String }
+ *   - the domain to point the iframe at eg. 'http://localhost:8000'
+ * - opts.debug { Boolean }
+ *   - set to a truthy value to append debug=true onto the iframe url
+ * - opts.ad { Boolean }
+ *   - set a truthy value to use 'AdUnit' url rather then 'Contest'
  */
 
-PostEmitter.prototype.getFrame = function ( selector ) {
-    if ( !( 'querySelector' in document ) ) {
-        this._emitter.emit( 'error', new Error( '"querySelector" is needed to target iframe' ) );
-        return;
-    }
-    return document.querySelector( selector );
+Hone.prototype.setSrc = function ( opts ) {
+    var domain = opts.domain || 'http://gohone.com',
+        debug = opts.debug ? '&debug=true' : '',
+        type = opts.ad ? 'AdUnit' : 'Quiz',
+        id = this.el.getAttribute( 'data-hone' );
+
+    this.el.src = domain + '/' + type + '/' + id + '?embed=true' + debug;
 };
 
-PostEmitter.prototype.on = function( ) {
-    this._emitter.on.apply( this._emitter, arguments );    
+/* Hone::onIframeResize ~ not yet implemented
+ *
+ * a defered excution function or thunk handling resize event 
+ * comming from the iframe to adjust height.
+ */
+
+Hone.prototype.onIframeResize = function ( ) {
+    var el = this.postEmitter.el;
+    return function ( e ) {
+        // should only have to control height
+        if ( typeof e.clientHeight !== 'number' ) return;
+        el.style.height = e.clientHeight + 'px';
+    };
 };
 
-PostEmitter.prototype.emit = function( ) {
+/* Hone::on
+ *
+ * a proxy for Component/Emitter::on method. Pass in a string with a event name 
+ * and a handler for more visit - https://github.com/component/emitter
+ *
+ * - eventName { String }
+ *   - eventName to consume with handler. Eg. 'vote'
+ * - handler { Function }
+ *   - a function to handle event when event is emitted
+ */
 
-    // splits the arguments into a nice array
-    var args = Array.prototype.slice.call(arguments, 0),
-        event = this.serialize( args );
-
-    var target = this.isIframe ? window.parent : ( this.el ? this.el.contentWindow : null );
-    if ( !target ) return; // this should have emitted an error already;
-    // emit to the correct location
-    if ( typeof target.postMessage !== 'function' ) {
-        this._emitter.emit( 'error', new Error( event[0] + ' not sent,' + 
-            '"postMessage" is needed to communicate with iframe' ) );
-        return;
-    }
-    target.postMessage( event, this._origin );
+Hone.prototype.on = function ( ) {
+    this.postEmitter.on.apply( this.postEmitter, arguments ); 
 };
 
-PostEmitter.prototype.setOrigin = function ( origin ) {
-    this._origin = origin || '*';
+/* Hone::on
+ *
+ * a proxy for Component/Emitter::emit method. Pass in a string with a event name 
+ * and a payload of data - https://github.com/component/emitter
+ *
+ * - eventName { String }
+ *   - eventName to consume with handler. Eg. 'vote'
+ * - ... { Mixed }
+ *   - the data you would like to send with event consumed in the iframe
+ *     can be just about anything except functions ( due to serialization )
+ */
+
+Hone.prototype.emit = function ( ) {
+    // we can hijack the emitter here and post it with the id.
+    this.postEmitter.emit.apply( this.postEmitter, arguments ); 
 };
 
-PostEmitter.prototype.onMessage = function ( e ) {
+/* Hone::urlParser || Hone.urlParser
+ *
+ * a way to parse ContestId out of url for exsisting iframes
+ *
+ * - url { String }
+ *   - a Hone contest url eg. 'http://gohone.com/Contest/5319243f5067cac36f9cc617?embed=true'
+ * - returns { Undefined || Object }
+ *   - object will container contestId
+ *   - if a bad url is passed in it will result in a undefined value being returned
+ */
 
-    // return if it doesnt have a good prefix
-    if ( !this.prefix.test( e.data ) )
-    {
-        return;
-    }
-
-    var msg = this.deserialize( e.data );
-    if ( !msg )
-    {
-        this._emitter.emit( 'error', new Error( 'could not parse event: ' + e.data ) );
-        return;
-    }
-
-    if ( !Array.isArray( msg ) )
-    {
-        this._emitter.emit( 'error', new Error( 'expected an array from postMessage instead got: ' + e.data ) );
-        return;
-    }
-    
-    this._emitter.emit.apply( this._emitter, msg );
+Hone.prototype.urlParser =
+Hone.urlParser = function ( url ) {
+    var resource, id;
+    // we should just be looking at contest urls.
+    if ( typeof url !== 'string' ) return;
+    url = url.split(/\//);
+    resource = url[ url.length - 2 ];
+    id = url[ url.length - 1 ];
+    if ( !resource ) return;
+    if ( resource.toLowerCase() !== 'contest' ) return;
+    id = id.split(/\?/).shift();
+    return {
+        contestId : id,
+        isContest : true 
+    };
 };
 
-PostEmitter.prototype.deserialize = function ( msg ) {
-    
-    var json = msg.slice( this.prefixLength );
-    var obj = null;
-    try
-    {
-        obj = JSON.parse( json );
+/* Hone::init
+ *
+ * a init function to build url when called, pass in a opts { Object }
+ * to configure iframe
+ *
+ * - opts { Object }
+ *   - opts.resize { Boolean }
+ *     - this will allow the iframe to resize its height to the content of
+ *       the iframe
+ *   - please reference Hone::setSrc
+ */
+
+Hone.prototype.init = function ( opts ) {
+    opts = opts || {};
+    if ( !this.el.src ) this.setSrc( opts );
+    if ( opts.resize && !this._resize ) { // check _resize to not bind event twice
+        this.on('resize', this.onIframeResize());
     }
-    catch ( e )
-    {
-        obj = null;
-        this.emit( 'error', e );
-    }
-    
-    return obj;
 };
 
-PostEmitter.prototype.serialize = function ( msg ) {
-    return this.options.prefix + JSON.stringify(msg);
-};
+/* initializing Hone
+ * this block of code initializes a Hone Contructor with some basic options
+ */
 
-PostEmitter.prototype.addListener = function ( ) {
-    if ( !('addEventListener' in window && Function.prototype.hasOwnProperty( 'bind' )) ) {
-        return this._emitter.emit( 'error', new Error( '"addEventListener" & ".bind()" needed to listen for messages'  ) );
-    }
-    window.addEventListener('message', this.onMessage.bind( this ), false );
-};
+var el = ('querySelector' in document) ? document.querySelector('[data-hone]') : null,
+    url, 
+    hone;
 
-PostEmitter.inIframe = isIframe;
-
-if ( isComponent ) {
-    module.exports = PostEmitter;
+// Check if embedded hone is present.
+if ( el ) {
+    url = el.src;
+    hone = new Hone({
+        selector : '[data-hone]',
+        hone : Hone.urlParser( url ) || {},
+        prefix : 'Hone:'
+    });
 }
 
-if( typeof onPostEmitterReady === 'function' ) {
-    onPostEmitterReady( PostEmitter );
-}
+/* exporting hone instance
+ * this is how we export hone, there is the global option or readyHandler option
+ * - the global option simply exports hone to window.hone
+ *   - in this option script need to be loaded before usage so hone var is available
+ * - the readyHandler option allow you to get a referance to hone once it has loaded
+ *   - in this option the script should be loaded after one method is to defer you 
+ *     script loading eg. '<script src="path-to/embed.js" defer></script>'
+ */
+
+if ( typeof onHoneReady === 'function' ) return onHoneReady( hone );
+window.hone = hone;

@@ -4,6 +4,8 @@
   "description": "A event emitter for embeded apps that allows you to talk to it via events rather then onMessage",
   "main": "index.js",
   "scripts": {
+    "build": "browserify index.js -o build/hone-embed.js && npm run compress",
+    "compress": "uglifyjs --screw-ie8 -o build/hone-embed.min.js build/hone-embed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,9 +15,11 @@
   "author": "Jacob Lowe",
   "license": "MIT",
   "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-contrib-concat": "~0.4.0",
-    "grunt-contrib-connect": "~0.7.1",
-    "grunt-contrib-uglify": "~0.4.0"
+    "browserify": "^8.1.1",
+    "uglify-js": "^2.4.16"
+  },
+  "dependencies": {
+    "eventemitter2": "^0.4.14",
+    "post-emitter": "^0.1.0"
   }
 }
