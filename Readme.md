@@ -17,7 +17,7 @@ optionally you can try out a beta feature that allows the iframe to resize its h
 Include the script into your page ( script located in `build` directory ) or _our cdn_
 
 ```html
-<script src="//honefiles.global.ssl.fastly.net/embed/hone-0.1.5.min.js"></script>
+<script src="https://s3-us-west-1.amazonaws.com/static-v1.gohone.com/sdk/2.10.8/hone.min.js"></script>
 ```
 
 ## Usage
